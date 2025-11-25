@@ -3,4 +3,4 @@ Mini-project about music and inner imagery
 
 This repository contains the LaTeX source for my report.
 
-
+📄 **PDF report:** [Download here](main.pdf)
