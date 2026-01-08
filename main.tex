@@ -8,6 +8,11 @@
 \usepackage{microtype}            % better spacing
 \usepackage{setspace}             % control line spacing
 \usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{textgreek}
+\usepackage{float}
+
+
 
 \usepackage[
     backend=biber,
@@ -30,7 +35,7 @@
 % and the key idea of the hypotheses/results.
 % \end{abstract}
 
-\noindent \textbf{Keywords:} music, visual mental imagery, emotion, mind-wandering
+\noindent \textbf{Keywords:} music, visual mental imagery, emotions, VVIQ
 
 \section{Background}
 
@@ -84,18 +89,218 @@ Taken together, these studies suggest that happy music with simple, positive emo
 
 Based on this reasoning, the study proposes the following hypotheses:
 
-\begin{itemize}
-    \item[H1:] During sad music, visual mental imagery will occur before emotional experience, reflecting the more complex and self-focused cognitive state evoked by sadness.
-    \item[H2:] During happy music, emotional experience will occur before visual mental imagery, reflecting the simpler and more externally oriented response of happy music.
-\end{itemize}
+\noindent H1: During sad music, visual mental imagery will occur before emotional experience. %reflecting the more complex and self-focused cognitive state evoked by sadness.\\
+
+\noindent H2: During happy music, emotional experience will occur before visual mental imagery. %reflecting the simpler and more externally oriented response of happy music.
 
 \section{Methods}
 
-Participants will be recruited through convenience sampling. Each participant listens to two 4-minute excerpts, one sad and one happy, originally used by Taruffi et al.\ (2017). According to Taruffi et al., these excerpts consist of instrumental film soundtrack music, matched for tempo and loudness, and edited into continuous 4-minute tracks. Using these validated excerpts ensures that differences between conditions stem from emotional tone rather than acoustic features. 
+\subsection{Conduction of the Online Test}
+Participants completed an online test developed in Unity. Before deploying a pilot test was conducted, on one person, to catch the most obvious mistakes or confusion points. Recruitment of participants was conducted through personal messages and a Facebook post containing a link to the test.
 
-Participants will listen through high-quality over-ear headphones in a quiet environment. They will be instructed to close their eyes during listening, as this facilitates emotional engagement and replicates the original study conditions. The order of conditions will be counterbalanced across participants to control for order effects.
+At the beginning of the test, participants were informed that they would not receive any personal reward for their participation, but that their responses would be greatly appreciated. They were also informed that the test would take approximately 10–15 minutes to complete. Participants were then given the option to continue or withdraw from the study.
 
-% (You can continue describing measurements, procedure, analysis, etc. here.)
+Participants were first asked to report their gender and age. They then completed the Vividness of Visual Imagery Questionnaire (VVIQ)\cite{VVIQ}. It was explicitly stated that having visual imagery, or having more vivid visual imagery, is not inherently more desirable than not experiencing imagery.
+
+Next, participants were asked about their listening setup (headphones, speakers, or earbuds) and the environment in which they were listening (e.g., at home alone or with others, in a quiet or busy public space). They were then instructed to press the E key whenever they experienced an emotion and the I key whenever they experienced inner imagery. Participants were encouraged to close their eyes to enhance the listening experience, and after pressing “start,” they were given a five-second delay before the music began.
+
+Participants then listened to one two-minute musical excerpts, either one sad or one happy, originally used by Taruffi et al. (2017), presented in randomized order. Afterwards, for each emotion they reported, participants were asked to select the type of emotion experienced, as well as its intensity and valence (on a five-point Likert scale), and were asked to shortly describe any visual imagery they experienced during listening.
+
+Finally, participants were thanked for their participation and given the opportunity to leave an open-ended comment.
+
+The test can be accessed here: \nolinkurl{https://vanillariis.itch.io/sound-web-test}\\
+
+\textit{\textbf{Note:}} The test was designed so that if participants felt none of the available emotion categories (longing, sadness, nostalgia, happiness, anger, or neutral) accurately described their experience, they could select “Other.” This option opened a text field where participants were asked to describe the emotion in their own words. Unfortunately, due to a coding error, these written responses were not saved.
+
+\subsection{Musical Excerpts}
+The original intention was to use the exact musical excerpts from the source study, as these excerpts were matched for tempo and loudness, ensuring that any differences between conditions would reflect emotional tone rather than acoustic features. However, the expert ratings used in the original study could not be obtained, and the author did not respond to email inquiries requesting access to this information.
+
+As an alternative, two musical pieces corresponding to the excerpts with the longest playback durations were selected. The pieces used were Hamlet by Ennio Morricone\cite{Hamlet} (sad) and À La Folie by Michael Nyman \cite{Folie} (happy). 
+
+Both pieces have been previously validated as effective in eliciting mental imagery and their respective emotional states, while minimizing potential bias arising from participants’ prior familiarity with the music. 
+
+\section{Results}
+The data was analyzed using R studio\cite{rstudio}. 
+
+\subsection{Participants:}
+There was a total of 32 participants. 21 men, 10 females and 1 non-binary. In the age 18-64, with most particiapnts being in the age 25-34. An overview of the age and gender of the participants can be seen in Figure \ref{fig:chracteristics}.
+
+17 of the participants got the Happy music and 15 of the participants got the Sad music. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{participant_characteristics.png}
+    \caption{\textit{Overview of the age and gender of the participants.}}
+    \label{fig:chracteristics}
+\end{figure}
+
+%press times are usually skewed, so median is often the better summary. We can actually do both and decide.
+
+\subsection{Visual Mental Imagery during music listening}
+28 of the 32 participants reported experiencing visual imagery. Of the four participants who did not, two had very low VVIQ scores, while the remaining two had average scores indicative of typical visual vividness. However, these two participants did not provide comments in the add-on section that might explain the absence of imagery despite their average VVIQ scores.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{VVIQ_imagery_correlation.png
+    }
+    \caption{\textit{
+The relationship between visual imagery ability (VVIQ total score) and the proportion of imagery key presses during music listening. Each point represents one participant, plotted by their VVIQ score on the x-axis and the proportion of imagery responses on the y-axis. The fitted regression line indicates a positive association between VVIQ and imagery responses: participants with higher VVIQ scores tended to report imagery more frequently during the music task.
+    }}
+    \label{fig:correlation}
+\end{figure}
+
+A Spearman rank-order correlation was conducted to examine the relationship between imagery ability (VVIQ total score) and imagery-related key presses during music listening. A visualization of the correlation can be seen in Figure \ref{fig:correlation}.
+
+To account for individual differences in overall response frequency, imagery responses were normalized by computing the proportion of imagery-related key presses relative to the total number of key presses for each participant.
+
+ A significant positive association was observed between trait imagery vividness (VVIQ) and the proportion of imagery-related responses during music listening (Spearman’s ρ = .39, p = .027). Consistent with this finding, higher VVIQ scores were also associated with a lower emotion–imagery balance score, reflecting a relative preference for imagery over emotion responses.
+
+This suggests that individuals with more vivid trait imagery tend to rely more strongly on imagery when experiencing music, rather than simply responding more frequently overall.
+ %A Spearman rank-order correlation was conducted to examine the relationship between trait imagery ability (VVIQ total score) and the proportion of imagery-related key presses during music listening. There was a significant positive association between the two variables, ρ = .39, p = .027, indicating that participants with higher imagery ability tended to report imagery more frequently during music.
+
+
+\subsection{Imagery-first Versus Emotion-first}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{first response.png}
+        \caption{\textit{The proportion of imagery-first versus emotion-first responses, for the sad and happy music.}}
+        \label{fig:img1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Median.png}
+        \caption{\textit{Response timing for emotion and imagery for the sad and happy music.}}
+        \label{fig:img2}
+    \end{subfigure}
+    \caption{\textit{The first figure shows if the participants first felt an emotion or first saw imagery doing the music listening for the sad and happy condition respectively. The second figure shows the median key press time for all the responses during the happy and the sad condition.}}
+    \label{fig:Fisrt respoonse and presstime}
+\end{figure}
+
+The proportion of imagery-first versus emotion-first responses did not differ at all between happy and sad music as seen in Figure \ref{fig:Fisrt respoonse and presstime}. However, analyses of response timing showed that imagery responses occurred slightly earlier overall during sad music, whereas emotional responses occurred much earlier during happy music.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{first_response_by_vviq_group_collapsed.png}
+    \caption{\textit{
+The proportion of imagery-first versus emotion-first responses, for participants with low, average and high VVIQ scores, in the respective sad and happy condition. 
+    }}
+    \label{fig:first_response_group}
+\end{figure}
+
+However, a more detailed analysis revealed a clear pattern when participants were divided into low/below average, average, and high/above average VVIQ groups. Participants with low VVIQ scores tended to report imagery before emotion during happy music, but emotion before imagery during sad music. Participants with average VVIQ scores showed an almost equal distribution between imagery-first and emotion-first responses in both conditions. In contrast, participants with high VVIQ scores tended to report emotion before imagery during happy music and imagery before emotion during sad music. A bar-chart showing the distributions for each category can be siin in Figure \ref{fig:first_response_group}
+
+
+\subsection{Emotions in The Happy Versus Sad Music Conditions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{emotion_frequency_bar_chart.png}
+    \caption{\textit{This bar chart displays how often each emotion category was reported during the happy and sad music conditions. The y-axis lists the reported emotion categories. The x-axis shows the frequency. Bars are color-coded by song emotion (happy vs. sad).}}
+    \label{fig:emo_freq}
+\end{figure}
+
+Figure \ref{fig:emo_freq} provides an overview of the emotions reported by participants under each musical condition. The distribution of emotional responses differs clearly between happy and sad music.
+
+During happy music, participants most frequently reported happy emotions, with substantially fewer reports of and no reports of sad emotions. In contrast, during sad music, reports shift toward sad and longing emotions, both of which occur much more frequently than in the happy condition. Some also reported happy emotions during the sad music. Neutral responses were relatively infrequent in both conditions but appeared more often during sad music.
+
+The Other category occurred in both conditions but was more frequent during happy music. Unfortunately, the specific descriptions of emotions classified as Other were not accessible. It is also noteworthy that one participant reported only Other emotions during listening; this participant alone accounted for five of the Other responses in the happy condition. If this participant were excluded, the number of Other responses would be nearly equal across the happy and sad conditions. Nostalgia was reported at similar rates in both conditions.
+
+\begin{figure}[th]
+    \centering
+    \includegraphics[width=1\textwidth]{valence_intensity_zoomed_with_frequency_labels.png}
+    \caption{\textit{This figure maps reported emotions into a two-dimensional affective space, separately for happy and sad music. The x-axis represents mean valence (how positive or negative the emotion was rated). The y-axis represents mean intensity (how strongly the emotion was felt). Each bubble represents one reported emotion category. Bubble size reflects the frequency with which that emotion was reported (numbers inside the bubbles show the exact counts).}}
+    \label{fig:valance_intencity}
+\end{figure}
+
+In Figure \ref{fig:valance_intencity}, all the emotions are mapped into a 2-dimensional space according to their mean intensity and mean valence. 
+
+In the happy music condition, Happy is located at high valence and relatively high intensity and is the most frequently reported emotion. Longing is also associated with relatively high intensity, although it is reported much less frequently. The remaining emotion categories (Nostalgia, Other, and Neutral) cluster at more moderate intensity levels, with Neutral being the least intense. Their valence ratings are generally positive, except for Neutral, although lower than those observed for Happy.
+
+In the sad music condition, Longing is positioned at relatively high intensity and moderately high valence. Sad is characterised by low valence and moderate intensity. Reports of Happy emotion during sad music are less frequent but show relatively high intensity, exceeding that observed in the happy music condition. Nostalgia occupies an intermediate position, with positive valence in both conditions, though its valence is slightly lower and intensity slightly higher during sad music compared to happy music.
+
+Across both conditions, Neutral emotions are positioned similarly, with near-neutral valence and low intensity, indicating consistency in how neutral experiences were rated regardless of musical context.
+
+\subsection{Visual Mental Imagery Themes}
+I reviewed all participant descriptions of visual imagery and extracted keywords for each. The resulting keywords for the happy and sad conditions are presented below.
+
+Across both musical conditions, participants commonly reported imagery related to being transported back in time, entering a fantasy-like world, and experiencing natural landscapes and musical performance. However, the qualitative characteristics of the imagery differed markedly between conditions.
+
+In the happy music condition, imagery was characterized by a high degree of movement and action. Scenes often involved battles that consistently resulted in victory, as well as flying, sunrises, dancing, and orchestral performances. 
+
+In contrast, imagery in the sad music condition was notably more static and somber. Participants frequently described cloudy skies, darker visual tones, themes of death, grief, and loss, and solitary violin performance.
+
+\begin{minipage}{0.48\textwidth}
+\textbf{Happy Condition}
+\begin{itemize}
+    \item Battles
+    \item Victory
+    \item Horses riding 
+    \item Sunrise
+    \item Dancing (Ballroom)
+    \item Orchestra playing
+    \item Dragons
+    \item Flying
+    \item Running water (rivers)
+    \item Nature (Forest, countryside)
+    \item Bridgerton
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\textbf{Sad Condition}
+\begin{itemize}
+    \item Cloudy sky
+    \item Dark colors  
+    \item Medieval towns and castles 
+    \item Funeral 
+    \item Death 
+    \item Grief
+    \item Loss 
+    \item Someone playing the violin
+    \item Nature (landscapes)
+\end{itemize}
+\end{minipage}
+
+\subsection{Comments from the participants}
+At the end of the test, participants were given the opportunity to leave an open-ended comment. A small number of participants chose to do so. Several comments indicated that participants felt confused by the lack of clear feedback when pressing the buttons, which made it difficult to know whether their input had been registered correctly. One participant noted that some of their emotion or imagery key presses did not seem to be recorded as intended.
+
+Additionally, one participant stated that the musical excerpts lacked sufficient nuance for them to experience a strong emotional response. Two participants reported that aspects of the test were sometimes unclear, and one participant mentioned that the task was cognitively demanding and difficult to manage from a memory perspective.
+ 
+
+\section{Discussion}
+
+This study examined whether visual mental imagery or emotion comes first during music listening, and whether this order differs between happy and sad music. Based on earlier research, it was hypothesized that imagery would occur before emotion during sad music, while emotion would occur before imagery during happy music. The results only partly supported these expectations.
+
+\subsection{Individual Differences in Imagery Ability May Influence The Temporal Relationship between Emotion and Imagery}
+The proportion of imagery-first versus emotion-first responses did not differ between happy and sad music when the participants were in one big group. However, response timing showed that imagery responses tended to occur slightly earlier during sad music, while emotional responses occurred much earlier during happy music. This indicates that, even if the overall order does not change, the timing of imagery and emotion does vary depending on the emotional tone of the music.
+
+When participants were divided based on their VVIQ scores, a different pattern emerged. The data suggest that participants with low VVIQ scores—that is, those who experience little or no visual mental imagery—tended to experience emotion before imagery during sad music, but imagery before emotion during happy music. For participants with high VVIQ scores, who report vivid visual mental imagery, the pattern was reversed: imagery tended to occur before emotion during sad music, and emotion before imagery during happy music. Participants with average VVIQ scores showed a more balanced pattern, falling between these two groups.
+
+Previous research suggests that simple emotions are often felt quickly, while more complex emotions may develop more gradually\cite{Day_Thompson_2019}. However, these findings suggest that individual differences in imagery ability also influence the temporal relationship between emotion and imagery during music listening, and that this relationship may differ depending on both emotional tone and listener characteristics. However, it can be hard to tell if the data would still tell this story if there were more participants, and a final conclusion cannot be made from this small dataset. 
+
+\subsection{Sad and happy music can engage listeners internally, but in  different ways.}
+In the present study, sad music primarily evoked emotions such as sadness, longing and nostalgia, which are more complex emotional states and may allow visual imagery to emerge earlier or play a stronger role in shaping the emotional experience. However, happy music also elicited feelings of nostalgia in some participants, possibly because the music was associated with old times. In addition, some participants reported feeling happy during the sad music condition. Despite these overlaps, the overall pattern of reported emotions corresponded to the intended emotional character of the musical excerpts. That said, it is noteworthy that a substantial portion of the reported emotions in the happy condition could not be fully interpreted because the qualitative data for the “Other” category was lost. Based on the available ratings, these responses generally showed neutral intensity and slightly positive valence, suggesting that they are unlikely to have strongly biased the overall results.
+
+The qualitative imagery descriptions partly support the findings of Taruffi et al. (2017), who showed that sad music promotes inward, self-referential thinking, while happy music tends to keep listeners more externally oriented. In the present study, the imagery across the two condition was somewhat similar, describing being in the old times, fantasy elements and natural landscapes. This may be related to the use of an acoustic, orchestral sound, which is often culturally associated with historical settings and fantasy narratives. However, imagery reported during sad music was generally more static and somber, often involving themes of darkness, loss, and solitude. In contrast, imagery during happy music was more action-oriented, featuring movement, victory, and social or fantastical scenes. However, these vivid and imaginative scenes suggest that happy music did not necessarily lead to an outward attentional focus. Instead, participants appeared to become absorbed in internally generated fantasy worlds. This challenges a simple inward–outward distinction and suggests that both sad and happy music can engage listeners internally, but in qualitatively different ways. This extends Taruffi et al.’s interpretation by suggesting that happy music does not necessarily reduce internal engagement, but may instead shift the quality of internal experience from reflective to imaginative and narrative-driven.
+
+\subsection{Limitations of The Test}
+It became clear that the button presses would have benefited from some form of feedback to confirm that responses were registered correctly. One participant also described the test as cognitively demanding, suggesting that it might have been easier to complete if only one task was required at a time, such as reporting either emotion or imagery rather than both simultaneously. However, as this concern was raised by only a single participant, it does not appear to represent a major issue.
+
+It should also be noted that the test allowed participants to proceed without providing responses, as no mandatory response checks were implemented. This could present a potential problem if participants accidentally skipped items or forgot to register a response. Such checks should therefore be included in future iterations of the test. Fortunately, no participants in the present study appeared to have missed any required responses. 
+
+\section{Conclusion}
+In relation to the proposed hypotheses, the results provide only partial support. At the group level, neither hypothesis was clearly confirmed, as no consistent imagery-first pattern emerged for sad music (H1), nor a consistent emotion-first pattern for happy music (H2). However, response timing and analyses based on imagery ability suggest that these hypothesized patterns may depend on individual differences in imagery ability rather than applying uniformly across listeners. 
+
+\section{Future Work}
+Future studies should include a larger and more diverse sample to better assess whether the observed patterns related to imagery ability are robust and generalizable. Improvements to the experimental design, such as clearer response feedback and mandatory response checks, would help reduce uncertainty in participant input. Additionally, future work could further explore how the musical features of these pieces might influence imagery content and emotional experience during music listening.
+
+
+\section{Acknowledgments}
+The Author of this Mini-project acknowledges the use of ChatGPT\cite{openai_chatgpt} for grammar, sentence structure and coding. 
 
 \printbibliography
 
